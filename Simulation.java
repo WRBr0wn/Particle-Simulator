@@ -56,7 +56,7 @@ public class Simulation {
         } else {
             ObstacleNode current = obstacleList;
             while (current.getNext() != null) {
-                current.setNext(current);
+                current = current.getNext();
             }
             current.setNext(newNode);
         }
