@@ -43,7 +43,6 @@ void mousePressed() {
     if (mouseButton == LEFT) {
         o = new Obstacle((float)1.0*mouseX/width, (float)(1.0-1.0*mouseY/height),0.1);
         simulation.addObstacle(o);
-        System.out.println("Job Complete");
     }
     if (mouseButton == RIGHT) {
         for (ObstacleNode n = ol; n != null; n = n.getNext()) {
