@@ -35,13 +35,13 @@ void draw() {
     }
     fill(0,0,255);
     for (ObstacleNode n = ol; n != null; n = n.getNext()) {
-        circle((int)(n.getObstacle().getX()*width), (int)(height-n.getObstacle().getY()*height), (int)(n.getObstacle().getRadius()*width*2.5));
+        circle((int)(n.getObstacle().getX()*width), (int)(height-n.getObstacle().getY()*height), (int)(n.getObstacle().getRadius()*width));
     }
 }
 
 void mousePressed() {
     if (mouseButton == LEFT) {
-        o = new Obstacle((float)1.0*mouseX/width, (float)(1.0-1.0*mouseY/height),0.1);
+        o = new Obstacle((float)1.0*mouseX/width, (float)(1.0-1.0*mouseY/height),0.25);
         simulation.addObstacle(o);
     }
     if (mouseButton == RIGHT) {
@@ -52,7 +52,9 @@ void mousePressed() {
                 obstacleTBR = n.getObstacle();
             }
         }
-        simulation.removeObstacle(obstacleTBR);
+        if (minDistance <= obstacleTBR.getRadius()) {
+          simulation.removeObstacle(obstacleTBR);
+        }
     }
 }
 
