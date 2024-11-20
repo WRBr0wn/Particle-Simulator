@@ -1,0 +1,18 @@
+public class ParticleAPI {
+  public void addMouseClick(double x, double y, String button) {
+    try {
+      OkHttpClient client = new OkHttpClient().newBuilder().build();
+      MediaType mediaType = MediaType.parse("application/json");
+      RequestBody body = RequestBody.create(mediaType, "{\r\n    \"x\": " +x + ",\r\n    \"y\": " +y + ",\r\n    \"button\": \"" + button + "\"\r\n}");
+      Request request = new Request.Builder()
+        .url("http://127.0.0.1:5000/mouse_click")
+        .method("POST", body)
+        .addHeader("Content-Type", "application/json")
+        .build();
+      Response response = client.newCall(request).execute();
+    }
+    catch(Exception e) {
+      System.out.println("Error");
+    }
+  }
+}
