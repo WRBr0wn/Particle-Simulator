@@ -60,7 +60,7 @@ def del_obstacle():
     return 'Success'
 
 @app.route('/obstacles', methods=['GET'])
-def get_mouse_clicks():
+def get_obstacles():
     return jsonify(obstacles)
 
 
