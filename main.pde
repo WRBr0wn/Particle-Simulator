@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.EventObject;
 
 Simulation simulation = new Simulation();
+ParticleAPI api = new ParticleAPI();
 Particle[] ps = simulation.getParticles();
 ObstacleNode ol;
 Obstacle o;
@@ -14,6 +15,7 @@ Random rd = new Random();
 void setup() {
     size(400,400);
     noStroke();
+    api.addInitialObstacles();
 }
 
 void draw() {
@@ -43,8 +45,9 @@ void mousePressed() {
     if (mouseButton == LEFT) {
         o = new Obstacle((float)1.0*mouseX/width, (float)(1.0-1.0*mouseY/height),0.25);
         simulation.addObstacle(o);
+        api.addObstacle(1.0*mouseX/width, 1.0*mouseY/height);
     }
-    if (mouseButton == RIGHT) {
+    else if (mouseButton == RIGHT) {
         for (ObstacleNode n = ol; n != null; n = n.getNext()) {
             distance = Vector2DMath.magnitude(((float)1.0*mouseX/width)-(n.getObstacle().getX()),((float)(1.0-1.0*mouseY/height))-(n.getObstacle().getY()));
             if (n == ol || distance < minDistance){
@@ -53,7 +56,7 @@ void mousePressed() {
             }
         }
         if (minDistance <= obstacleTBR.getRadius()) {
-          simulation.removeObstacle(obstacleTBR);
+            simulation.removeObstacle(obstacleTBR);
         }
     }
 }
