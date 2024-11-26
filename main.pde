@@ -52,7 +52,7 @@ void mousePressed() {
                 obstacleTBR = n.getObstacle();
             }
         }
-        if (minDistance <= obstacleTBR.getRadius()) {
+        if (minDistance <= obstacleTBR.getRadius()/2.0) {
           simulation.removeObstacle(obstacleTBR);
         }
     }
