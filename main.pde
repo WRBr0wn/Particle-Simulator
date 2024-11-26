@@ -47,7 +47,7 @@ void mousePressed() {
         simulation.addObstacle(o);
         api.addObstacle(1.0*mouseX/width, 1.0*mouseY/height);
     }
-    else if (mouseButton == RIGHT) {
+    if (mouseButton == RIGHT) {
         for (ObstacleNode n = ol; n != null; n = n.getNext()) {
             distance = Vector2DMath.magnitude(((float)1.0*mouseX/width)-(n.getObstacle().getX()),((float)(1.0-1.0*mouseY/height))-(n.getObstacle().getY()));
             if (n == ol || distance < minDistance){
