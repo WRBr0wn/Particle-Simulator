@@ -8,7 +8,6 @@ obstacles = [] # or maybe {} or [{}]
 with open('obstacles.csv', 'r') as file:
     csvFile = csv.DictReader(file)
     for line in csvFile:
-        print(line)
         obstacles.append(line)
 
 @app.route('/obstacle', methods=['POST'])
@@ -18,7 +17,7 @@ def add_obstacle():
     obstacles.append(obstacle)
     # save to csv
     with open('obstacles.csv', 'a', newline='') as csvfile:
-        fieldnames = ['x', 'y']
+        fieldnames = ['x', 'y','id']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writerow(obstacle)
 
@@ -27,16 +26,24 @@ def add_obstacle():
 @app.route('/obstacle', methods=['DELETE'])
 def del_obstacle():
     # del from obstacles (perhaps use an id)
-    obstacle = request.json
-    obstacles.remove(obstacle)
+    id = request.json
+    for obstacle in obstacles:
+        if id in obstacle.values():
+            obstacles.remove(obstacle)
 
     #del from csv
+    with open('obstacles.csv', 'w', newline='') as csvfile:
+        fieldnames = ['x', 'y','id']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(obstacles)
+            
 
     return 'Success'
 
 @app.route('/obstacles', methods=['GET'])
 def get_obstacles():
-    return "success"
+    return jsonify(obstacles)
 
 
 

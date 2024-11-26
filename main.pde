@@ -15,7 +15,7 @@ Random rd = new Random();
 void setup() {
     size(400,400);
     noStroke();
-    api.addInitialObstacles();
+    JsonNode node = api.getInitialObstacles();
 }
 
 void draw() {
@@ -45,7 +45,7 @@ void mousePressed() {
     if (mouseButton == LEFT) {
         o = new Obstacle((float)1.0*mouseX/width, (float)(1.0-1.0*mouseY/height),0.25);
         simulation.addObstacle(o);
-        api.addObstacle(1.0*mouseX/width, 1.0*mouseY/height);
+        api.addObstacle(1.0*mouseX/width, 1.0-1.0*mouseY/height);
     }
     if (mouseButton == RIGHT) {
         for (ObstacleNode n = ol; n != null; n = n.getNext()) {
@@ -55,8 +55,11 @@ void mousePressed() {
                 obstacleTBR = n.getObstacle();
             }
         }
-        if (minDistance <= obstacleTBR.getRadius()) {
+        if (minDistance <= obstacleTBR.getRadius()/2.0) {
             simulation.removeObstacle(obstacleTBR);
+            float id = (float)obstacleTBR.getX()+(float)obstacleTBR.getY();
+            System.out.println(id);
+            api.removeObstacle(id);
         }
     }
 }
