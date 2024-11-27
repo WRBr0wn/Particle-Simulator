@@ -31,7 +31,7 @@ def del_obstacle():
         if id in obstacle.values():
             obstacles.remove(obstacle)
 
-    #del from csv
+    #del from csv (rewrite without deleted value)
     with open('obstacles.csv', 'w', newline='') as csvfile:
         fieldnames = ['x', 'y','id']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
