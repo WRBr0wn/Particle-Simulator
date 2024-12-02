@@ -16,11 +16,13 @@ void setup() {
     size(400,400);
     noStroke();
     JsonNode rootNode = api.getInitialObstacles();
-    for (JsonNode node : rootNode) {
-        double import_x = node.get("x").asDouble();
-        double import_y = node.get("y").asDouble();
-        o = new Obstacle((float)import_x, (float)(import_y),0.25);
-        simulation.addObstacle(o);
+    if (rootNode != null && rootNode.isArray()) {
+        for (JsonNode node : rootNode) {
+            float obstacleX = (float) node.get("x").asDouble();
+            float obstacleY = (float) node.get("y").asDouble();
+            o = new Obstacle(obstacleX, (obstacleY),0.25);
+            simulation.addObstacle(o);
+        }
     }
 }
 
