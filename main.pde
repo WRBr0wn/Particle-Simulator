@@ -2,7 +2,6 @@ import java.util.Random;
 import java.util.EventObject;
 
 Simulation simulation = new Simulation();
-ParticleAPI api = new ParticleAPI();
 Particle[] ps = simulation.getParticles();
 ObstacleNode ol;
 Obstacle o;
@@ -15,15 +14,6 @@ Random rd = new Random();
 void setup() {
     size(400,400);
     noStroke();
-    JsonNode rootNode = api.getInitialObstacles();
-    if (rootNode != null && rootNode.isArray()) {
-        for (JsonNode node : rootNode) {
-            float obstacleX = (float) node.get("x").asDouble();
-            float obstacleY = (float) node.get("y").asDouble();
-            o = new Obstacle(obstacleX, (obstacleY),0.25);
-            simulation.addObstacle(o);
-        }
-    }
 }
 
 void draw() {
@@ -53,7 +43,6 @@ void mousePressed() {
     if (mouseButton == LEFT) {
         o = new Obstacle((float)1.0*mouseX/width, (float)(1.0-1.0*mouseY/height),0.25);
         simulation.addObstacle(o);
-        api.addObstacle(1.0*mouseX/width, 1.0-1.0*mouseY/height);
     }
     if (mouseButton == RIGHT) {
         for (ObstacleNode n = ol; n != null; n = n.getNext()) {
@@ -66,7 +55,6 @@ void mousePressed() {
         if (minDistance <= obstacleTBR.getRadius()/2.0) {
             simulation.removeObstacle(obstacleTBR);
             float id = (float)obstacleTBR.getX()+(float)obstacleTBR.getY();
-            api.removeObstacle(id);
         }
     }
 }
