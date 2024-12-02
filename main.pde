@@ -15,7 +15,13 @@ Random rd = new Random();
 void setup() {
     size(400,400);
     noStroke();
-    JsonNode node = api.getInitialObstacles();
+    JsonNode rootNode = api.getInitialObstacles();
+    for (JsonNode node : rootNode) {
+        double import_x = node.get("x").asDouble();
+        double import_y = node.get("y").asDouble();
+        o = new Obstacle((float)import_x, (float)(import_y),0.25);
+        simulation.addObstacle(o);
+    }
 }
 
 void draw() {
@@ -58,7 +64,6 @@ void mousePressed() {
         if (minDistance <= obstacleTBR.getRadius()/2.0) {
             simulation.removeObstacle(obstacleTBR);
             float id = (float)obstacleTBR.getX()+(float)obstacleTBR.getY();
-            System.out.println(id);
             api.removeObstacle(id);
         }
     }

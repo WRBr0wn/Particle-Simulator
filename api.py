@@ -4,6 +4,7 @@ import csv
 
 app = Flask(__name__)
 
+# Load from CSV
 obstacles = [] # or maybe {} or [{}]
 with open('obstacles.csv', 'r') as file:
     csvFile = csv.DictReader(file)

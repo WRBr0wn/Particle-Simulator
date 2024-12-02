@@ -7,21 +7,15 @@ public class ParticleAPI {
     public JsonNode getInitialObstacles() {
         try {
             OkHttpClient client2 = new OkHttpClient().newBuilder().build();
-            MediaType mediaType = MediaType.parse("text/plain");
-            RequestBody body = RequestBody.create(mediaType, "");
-            Request request = new Request.Builder().url("http://127.0.0.1:5000/obstacles").method("GET", body).build();
-            System.out.println("Success");
+            Request request = new Request.Builder().url("http://127.0.0.1:5000/obstacles").get().build();
             Response response = client2.newCall(request).execute();
-
+        
             String json = response.body().string();
-            System.out.println(json);
             ObjectMapper mapper = new ObjectMapper();
             JsonNode jsonNode = mapper.readTree(json);
-            System.out.println(jsonNode);
             return jsonNode;
-        }
-        catch(Exception e) {
-            System.out.println("Error AIO");
+        } catch (Exception e) {
+            System.out.println("GET Error");
             return null;
         }
     }
@@ -35,7 +29,7 @@ public class ParticleAPI {
             Response response = client.newCall(request).execute();
         }
         catch(Exception e) {
-            System.out.println("Error");
+            System.out.println("POST Error");
         }
     }
     public void removeObstacle(float id) {
@@ -47,7 +41,7 @@ public class ParticleAPI {
             Response response = client.newCall(request).execute();
         }
         catch(Exception e) {
-            System.out.println("Error");
+            System.out.println("DEL Error");
         }
     }
 }
