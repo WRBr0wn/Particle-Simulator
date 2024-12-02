@@ -14,6 +14,7 @@ Random rd = new Random();
 void setup() {
     size(400,400);
     noStroke();
+    ellipseMode(RADIUS);
 }
 
 void draw() {
@@ -22,7 +23,7 @@ void draw() {
     ol = simulation.getObstacles();
     for (int i = 0; i < simulation.getNumParticles(); i++) {
         if (ps[i].getX() > 1.1 || ps[i].getX() < -0.1) {
-            ps[i] = new Particle(rd.nextFloat(), 1.0, 0.1);
+            ps[i] = new Particle(rd.nextFloat(), 1.0, 0.05);
             ps[i].setVelocityX(rd.nextFloat());
         }
         for (ObstacleNode n = ol; n != null; n = n.getNext()) {
@@ -41,7 +42,7 @@ void draw() {
 
 void mousePressed() {
     if (mouseButton == LEFT) {
-        o = new Obstacle((float)1.0*mouseX/width, (float)(1.0-1.0*mouseY/height),0.25);
+        o = new Obstacle((float)1.0*mouseX/width, (float)(1.0-1.0*mouseY/height),0.125);
         simulation.addObstacle(o);
     }
     if (mouseButton == RIGHT) {
@@ -52,7 +53,7 @@ void mousePressed() {
                 obstacleTBR = n.getObstacle();
             }
         }
-        if (minDistance <= obstacleTBR.getRadius()/2.0) {
+        if (minDistance <= obstacleTBR.getRadius()) {
             simulation.removeObstacle(obstacleTBR);
             float id = (float)obstacleTBR.getX()+(float)obstacleTBR.getY();
         }
