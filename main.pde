@@ -74,10 +74,13 @@ void mousePressed() {
 }
 
 void keyPressed() {
-    if (key == '+' || keyCode == 61) {
+    if (key == 43) {
         simulation.addParticles(50);
     }
-    else if (key == '-') {
+    else if (key == 45) {
         simulation.removeParticles(50);
+    }
+    else if (key == 33) {
+      exit();
     }
 }
