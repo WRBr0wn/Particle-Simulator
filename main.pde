@@ -15,13 +15,17 @@ Random rd = new Random();
 void setup() {
     size(400,400);
     noStroke();
+    ellipseMode(RADIUS);
     JsonNode rootNode = api.getInitialObstacles();
-    for (JsonNode node : rootNode) {
-        double import_x = node.get("x").asDouble();
-        double import_y = node.get("y").asDouble();
-        o = new Obstacle((float)import_x, (float)(import_y),0.25);
-        simulation.addObstacle(o);
+    if (rootNode != null && rootNode.isArray()){
+        for (JsonNode node : rootNode) {
+            double import_x = node.get("x").asDouble();
+            double import_y = node.get("y").asDouble();
+            o = new Obstacle((float)import_x, (float)(import_y),0.125);
+            simulation.addObstacle(o);
+        }    
     }
+    
 }
 
 void draw() {
@@ -30,7 +34,7 @@ void draw() {
     ol = simulation.getObstacles();
     for (int i = 0; i < simulation.getNumParticles(); i++) {
         if (ps[i].getX() > 1.1 || ps[i].getX() < -0.1) {
-            ps[i] = new Particle(rd.nextFloat(), 1.0, 0.1);
+            ps[i] = new Particle(rd.nextFloat(), 1.0, 0.05);
             ps[i].setVelocityX(rd.nextFloat());
         }
         for (ObstacleNode n = ol; n != null; n = n.getNext()) {
@@ -49,7 +53,7 @@ void draw() {
 
 void mousePressed() {
     if (mouseButton == LEFT) {
-        o = new Obstacle((float)1.0*mouseX/width, (float)(1.0-1.0*mouseY/height),0.25);
+        o = new Obstacle((float)1.0*mouseX/width, (float)(1.0-1.0*mouseY/height),0.125);
         simulation.addObstacle(o);
         api.addObstacle(1.0*mouseX/width, 1.0-1.0*mouseY/height);
     }
@@ -61,7 +65,7 @@ void mousePressed() {
                 obstacleTBR = n.getObstacle();
             }
         }
-        if (minDistance <= obstacleTBR.getRadius()/2.0) {
+        if (minDistance <= obstacleTBR.getRadius()) {
             simulation.removeObstacle(obstacleTBR);
             float id = (float)obstacleTBR.getX()+(float)obstacleTBR.getY();
             api.removeObstacle(id);

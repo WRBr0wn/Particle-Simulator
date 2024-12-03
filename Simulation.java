@@ -43,7 +43,7 @@ public class Simulation {
             particles = tempParticles;
         }
         for(int i = numParticles; i < numParticles + amount; i++) {
-            particles[i] = new Particle(rd.nextFloat(), 1.0, 0.1);
+            particles[i] = new Particle(rd.nextFloat(), 1.0, 0.05);
             if(rd.nextFloat() > 0.5) {
                 direction = 1;
             }
