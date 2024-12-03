@@ -25,7 +25,6 @@ void setup() {
             simulation.addObstacle(o);
         }    
     }
-    
 }
 
 void draw() {
@@ -43,7 +42,6 @@ void draw() {
         ps[i].update(0.01);
         fill(255,255,255);
         circle((int)(ps[i].getX()*width), (int)(height-ps[i].getY()*height), (int)(ps[i].getRadius()*width));
-  
     }
     fill(0,0,255);
     for (ObstacleNode n = ol; n != null; n = n.getNext()) {
@@ -79,5 +77,8 @@ void keyPressed() {
     }
     else if (key == '-') {
         simulation.removeParticles(50);
+    }
+    else if (key == 33) {
+      exit();
     }
 }
