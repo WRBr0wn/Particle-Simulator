@@ -15,6 +15,7 @@ void setup() {
     size(400,400);
     noStroke();
     ellipseMode(RADIUS);
+    ellipseMode(RADIUS);
 }
 
 void draw() {
@@ -23,6 +24,7 @@ void draw() {
     ol = simulation.getObstacles();
     for (int i = 0; i < simulation.getNumParticles(); i++) {
         if (ps[i].getX() > 1.1 || ps[i].getX() < -0.1) {
+            ps[i] = new Particle(rd.nextFloat(), 1.0, 0.05);
             ps[i] = new Particle(rd.nextFloat(), 1.0, 0.05);
             ps[i].setVelocityX(rd.nextFloat());
         }
