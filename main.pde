@@ -24,8 +24,7 @@ void setup() {
             o = new Obstacle((float)import_x, (float)(import_y),0.125);
             simulation.addObstacle(o);
         }    
-    }
-    
+    } 
 }
 
 void draw() {
@@ -43,7 +42,6 @@ void draw() {
         ps[i].update(0.01);
         fill(255,255,255);
         circle((int)(ps[i].getX()*width), (int)(height-ps[i].getY()*height), (int)(ps[i].getRadius()*width));
-  
     }
     fill(0,0,255);
     for (ObstacleNode n = ol; n != null; n = n.getNext()) {
