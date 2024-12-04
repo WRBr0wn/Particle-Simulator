@@ -6,12 +6,13 @@ ENV PYTHONUNBUFFERED=1
 
 # Install Python dependencies
 RUN pip install --upgrade pip
-COPY requirements.txt .
+#   Move into correct directory
+WORKDIR /app
+COPY server/requirements.txt .
 RUN pip install -r requirements.txt
 
-# Copy application code (Python/Flask and Java)
-WORKDIR /app
-COPY . /app
+# Copy application code
+COPY server/ .
 
 # Expose Flask's default port
 EXPOSE 5000
