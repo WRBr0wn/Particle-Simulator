@@ -1,7 +1,7 @@
 # Graphical Particle Simulator
 Owner: Wyatt Brown
 
-This graphical Particle Simulator uses Processing and Java to display and simulate the interaction between particles and obstacles. \n
+This graphical Particle Simulator uses Processing and Java to display and simulate the interaction between particles and obstacles.
 It also uses python's flask api and a csv file to store/retrive/save/update obstacles in the simulation.
 
 To use this project:
