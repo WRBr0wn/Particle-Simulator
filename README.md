@@ -1,4 +1,4 @@
-# Graphical Particle Simulator
+# Graphical Particle Simulator (Windows)
 Owner: Wyatt Brown
 
 This graphical Particle Simulator uses Processing and Java to display and simulate the interaction between particles and obstacles.
@@ -7,6 +7,7 @@ images, this feature is not used in this version.
 
 To use this project:
 
+- Start an x server on your Windows Machine
 - Run the docker image one of two ways:
   - Pull and run the Docker image from brow6946/particle-simulator
   - Use the provided Dockerfile and associated files to create and run a new docker image
